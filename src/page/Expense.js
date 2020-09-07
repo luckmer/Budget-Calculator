@@ -1,6 +1,6 @@
 import React from "react";
 import HandleExpenses from "../hooks/ExpenseHook";
-import { Container } from "../css/main";
+import { Container, BorderView, Header, Card, Context } from "../css/main";
 function Expense() {
     const {
         handleSubmit,
@@ -14,28 +14,39 @@ function Expense() {
     } = HandleExpenses();
     return (
         <Container>
-            <div>{Value}</div>
-            <form onSubmit={handleSubmit}>
-                <input type="text" value={context} onChange={handleContext} />
-                <hr />
-                <input type="number" value={amount} onChange={handleAmount} />
-                <hr />
-                <button type="submit " disabled={!amount ? true : false}>
-                    Submit
-                </button>
-            </form>
+            <Card>
+                <Header>{Value}</Header>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        value={context}
+                        onChange={handleContext}
+                    />
+                    <hr />
+                    <input
+                        type="number"
+                        value={amount}
+                        onChange={handleAmount}
+                    />
+                    <hr />
+                    <button type="submit " disabled={!amount ? true : false}>
+                        Submit
+                    </button>
+                </form>
 
-            <div>
-                {state.map(({ title, amount, id }) => (
-                    <div key={id}>
-                        {title}
-                        {amount}
+                <BorderView>
+                    <Context>
+                        {state.map(({ title, amount, id }) => (
+                            <p key={id}>
+                                {title} {amount}
+                            </p>
+                        ))}
+                    </Context>
+                    <div>
+                        <button onClick={handleDelete}>Clear History</button>
                     </div>
-                ))}
-            </div>
-            <div>
-                <button onClick={handleDelete}>Clear History</button>
-            </div>
+                </BorderView>
+            </Card>
         </Container>
     );
 }

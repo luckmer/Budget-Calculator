@@ -39,7 +39,7 @@ export default function HandleExpenses() {
         setState(clear);
     };
 
-    const Map = state.map(({ amount }) => amount);
+    const Map = state.map(({ amount }) => +amount);
     const Value = Map.reduce((curr, next) => (curr += next), 0);
 
     return {
